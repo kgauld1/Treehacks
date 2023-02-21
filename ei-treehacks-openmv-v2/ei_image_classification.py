@@ -29,7 +29,7 @@ while(True):
             label = predictions_list[i][0]
             if label == 'angry' or label=='sad' or label=='neutral':
                 confidence *= 0.9
-            if label=='surprised':
+            if label=='surprised' or label='happy':
                 confidence *= 1.1
 
             if confidence > mconf:

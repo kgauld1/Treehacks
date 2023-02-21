@@ -161,10 +161,10 @@ uint16_t XYsafe( uint8_t x, uint8_t y)
 
 
 // Demo that USES "XY" follows code below
-int col_g[6][3] = {{220, 35, 35}, //angry
+int col_g[6][3] = {{230, 20, 20}, //angry
                    {132, 38, 199}, //fearful
-                   {199, 40, 170}, //happy
-                   {50, 168, 82}, //neutral
+                   {180, 40, 170}, //happy
+                   {120, 120, 120}, //neutral
                    {35, 78, 207}, //sad
                    {207, 181, 35}}; //surprised
 int ccol[3] = {0, 0, 0};
@@ -177,28 +177,28 @@ void loop() {
       int dcol = col_g[idx][i] - ccol[i];
       tdif += dcol;
       
-      if(dcol > 0) dcol = random(0,dcol/150+1);
-      else         dcol = random(dcol/150-1,0);
+      if(dcol > 0) dcol = random(0,dcol/50+1);
+      else         dcol = random(dcol/50-1,0);
       
       ccol[i] += dcol;
     }
     
     setAllRGB(ccol[0], ccol[1], ccol[2], tdif/20+2);
     FastLED.show();
-    //delay(20);
+    //delay(2);
   } else {
     for(int i = 0; i < kMatrixWidth*kMatrixHeight; i++) leds[i] = CHSV(0,0,0);
     FastLED.show();
-    //delay(20);
+    //delay(2);
   }
 }
 
 
 void setAllRGB(int r, int g, int b, int n) {
-  n = min(n,30);
-  r = max(35, min(r,255-35));
-  g = max(35, min(g,255-35));
-  b = max(35, min(b,255-35));
+  n = min(n,10);
+  r = max(n+5, min(r,255-n-5));
+  g = max(n+5, min(g,255-n-5));
+  b = max(n+5, min(b,255-n-5));
   for(int i = 0; i < kMatrixWidth*kMatrixHeight; i++) {
     leds[i] = CRGB(r + random(-n,n),
                    g + random(-n,n),
